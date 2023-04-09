@@ -1,43 +1,60 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faIndustry } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import Image from "next/image";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faReact } from "@fortawesome/free-brands-svg-icons";
 
-const Navbar = () => {
+const NavBar = () => {
+  const [open, setOpen] = useState(false);
+  const menuItems = [
+    { name: "Home", route: "/" },
+    { name: "About", route: "/about" },
+    { name: "Learn", route: "/learn" },
+    { name: "My App", route: "/my-app" },
+  ];
+
   return (
-    <header class="text-gray-600 body-font">
-      <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <nav class="flex lg:w-2/5 flex-wrap items-center text-base md:ml-auto">
-          <a class="mr-5 hover:text-gray-900">First Link</a>
-          <a class="mr-5 hover:text-gray-900">Second Link</a>
-          <a class="mr-5 hover:text-gray-900">Third Link</a>
-          <a class="hover:text-gray-900">Fourth Link</a>
-        </nav>
-        <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-            viewBox="0 0 24 24"
-          >
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-          </svg>
-          <span class="ml-3 text-xl">Tailblocks</span>
-        </a>
-        <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0">
-          <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
-            Button
-            <FontAwesomeIcon
-              icon={faIndustry}
-              style={{ fontSize: 15, color: "blue" }}
-            />
-          </button>
+    <header className="shadow-md w-full fixed top-0 left-0">
+      <div className="flex items-center justify-between bg-white py-4 md:px-10 px-7">
+        <ul
+          className={`md:flex md:items-center md:pb-0 pb-12 absolute md:static bg-white md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            open ? "top-16 " : "top-[-490px]"
+          }`}
+        >
+          {menuItems.map((menu) => {
+            return (
+              <li
+                key={menu.name}
+                className="cursor-pointer select-none text-black  md:ml-8 text-xl hover:text-coral duration-500 items-center flex md:my-0 my-7"
+              >
+                <h1>{menu.name}</h1>
+              </li>
+            );
+          })}
+        </ul>
+        <div
+          onClick={() => setOpen(!open)}
+          className="h-7 w-7 flex justify-center items-center cursor-pointer md:hidden"
+        >
+          {open ? (
+            <FontAwesomeIcon icon={faXmark} size="2x" className="text-black" />
+          ) : (
+            <FontAwesomeIcon icon={faBars} size="2x" className="text-black" />
+          )}
+        </div>
+        <div className="flex items-center cursor-pointer select-none">
+          <Image src="/KD.jpg" alt="logo" width={84} height={84} />
         </div>
       </div>
     </header>
   );
 };
 
-export default Navbar;
+export default NavBar;
+{
+  /* <FontAwesomeIcon
+              icon={faIndustry}
+              style={{ fontSize: 15, color: "blue" }}
+            /> */
+}
