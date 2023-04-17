@@ -8,3 +8,13 @@
   flex: 1;
   background-color: white;
 }
+.test_style {
+  background-color: gold;
+}
+.amiri_font {
+  font-family: var(--amiri-font);
+}
+
+.roboto_font {
+  font-family: var(--roboto-font);
+}

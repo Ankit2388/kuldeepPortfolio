@@ -1,15 +1,19 @@
 import "@/styles/globals.css";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { config, library } from "@fortawesome/fontawesome-svg-core";
-// Tell Font Awesome to skip adding the CSS automatically
-// since it's already imported above
-// import { fas } from "@fortawesome/free-solid-svg-icons";
-// import { fab } from "@fortawesome/free-brands-svg-icons";
-// import { far } from "@fortawesome/free-regular-svg-icons";
-
-// config.autoAddCss = false;
-// library.add(fab, fas, far);
+import { Amiri, Roboto } from "next/font/google";
+const amiri = Amiri({ subsets: ["latin"], weight: ["400", "700"] });
+const roboto = Roboto({ subsets: ["latin"], weight: ["400", "700"] });
 
 export default function App({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <style jsx global>{`
+        :root {
+          --amiri-font: ${amiri.style.fontFamily};
+          --roboto-font: ${roboto.style.fontFamily};
+        }
+      `}</style>
+      <Component {...pageProps} />
+    </>
+  );
 }
